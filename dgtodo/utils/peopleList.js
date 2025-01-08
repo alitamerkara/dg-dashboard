@@ -1,0 +1,17 @@
+export const people = [
+    { id: "1", email: "ali@gmail.com", name: "alitamerkara", user: "Ali Tamer Kara", duties: [] },
+    { id: "2", email: "random1@gmail.com", name: "random1", user: "random1", duties: [] },
+    { id: "3", email: "random2@gmail.com", name: "random2", user: "random2", duties: [] },
+    { id: "4", email: "random3@gmail.com", name: "random3", user: "random3", duties: [] },
+    { id: "5", email: "random4@gmail.com", name: "random4", user: "random4", duties: [] },
+    { id: "6", email: "random5@gmail.com", name: "random5", user: "random5", duties: [] },
+    { id: "7", email: "random5@gmail.com", name: "random6", user: "random6", duties: [] },
+    { id: "8", email: "random5@gmail.com", name: "random7", user: "random7", duties: [] },
+    { id: "9", email: "random5@gmail.com", name: "random8", user: "random8", duties: [] },
+    { id: "10", email: "random5@gmail.com", name: "random9", user: "random9", duties: [] },
+    { id: "11", email: "random5@gmail.com", name: "random10", user: "random10", duties: [] },
+    { id: "12", email: "random5@gmail.com", name: "random11", user: "random11", duties: [] },
+    { id: "13", email: "random5@gmail.com", name: "random12", user: "random12", duties: [] },
+    { id: "14", email: "random5@gmail.com", name: "random13", user: "random13", duties: [] },
+    { id: "15", email: "random5@gmail.com", name: "random14", user: "random14", duties: [] },
+];

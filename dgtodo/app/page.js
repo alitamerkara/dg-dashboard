@@ -5,7 +5,7 @@ export default function HomePage() {
     <div className="container">
       <h1 className="heading">Welcome to My Website</h1>
       <p className="paragraph">Navigate to different pages:</p>
-      <h1 className="subheading">Tailwind CSS Removed!</h1>
+      <Link href="/login">Login</Link>
     </div>
   );
 }

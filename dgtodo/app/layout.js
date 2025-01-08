@@ -50,9 +50,9 @@ export default function RootLayout({ children }) {
           </nav>
         </header>
         <main className="main">{children}</main>
-        <footer className="footer">
+        {/* <footer className="footer">
           © 2025 My Website
-        </footer>
+        </footer> */}
       </body>
     </html>
   );

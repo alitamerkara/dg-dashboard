@@ -1,0 +1,40 @@
+/* ...existing code... */
+
+.profile-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.profile-heading {
+    color: #333;
+}
+
+.profile-email {
+    color: #555;
+}
+
+.duties-heading {
+    color: #333;
+    margin-top: 20px;
+}
+
+.duties-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.duty-item {
+    background: #f9f9f9;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.duty-title {
+    color: #333;
+}
+
+.duty-content {
+    color: #555;
+}

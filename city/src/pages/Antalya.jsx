@@ -91,7 +91,6 @@ function Antalya() {
     setSeventhValue(item["Toplam Ödeme"])
     setVehicle(item["Araç"])
   }
-
   useEffect(() => {
     fetchStokData()
   }, [])

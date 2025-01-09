@@ -13,24 +13,29 @@ const PeoplePage = () => {
     const [dutyTitle, setDutyTitle] = useState("");
     const [dutyContent, setDutyContent] = useState("");
     const [dutyPerson, setDutyPerson] = useState("");
+    const [saved, setSaved] = useState("");
 
     const openModalHandler = (name) => {
         setDutyPerson(name);
         setOpenModal(true);
     };
-
     const dutyHandler = async () => {
         try {
+            const currentDate = new Date();
+            const formattedDate = `${currentDate.getHours()}:${currentDate.getMinutes()} ${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
             await addDoc(collection(db, 'duties'), {
                 title: dutyTitle,
                 content: dutyContent,
-                person: dutyPerson
+                person: dutyPerson,
+                time: formattedDate
             });
             setDutyPerson("");
             setDutyTitle("");
             setDutyContent("");
-            setOpenModal(false);
-            alert("Görev başarıyla eklendi");
+            setSaved("Görev başarıyla eklendi.");
+            setTimeout(() => {
+            setOpenModal(false); 
+            },1000);
         } catch (e) {
             console.error("Error adding document: ", e);
         }
@@ -67,7 +72,7 @@ const PeoplePage = () => {
                 ))}
                 {openModal && (
                     <div className="modal">
-                        <form className="modalContent">
+                        <form className="modalContent" onSubmit={dutyHandler}>
                             <div className='modalItem'>
                                 <label htmlFor="duty">Görev Başlığı:</label>
                                 <input type="text" id="duty" name="duty" required value={dutyTitle} onChange={(e) => setDutyTitle(e.target.value)} />
@@ -78,6 +83,7 @@ const PeoplePage = () => {
                             </div>
                             <button className='closeButton' onClick={() => setOpenModal(false)}>x</button>
                             <button type="button" onClick={dutyHandler}>Kaydet</button>
+                            <div>{saved}</div>
                         </form>
                     </div>
                 )}

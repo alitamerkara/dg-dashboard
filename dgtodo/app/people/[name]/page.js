@@ -40,6 +40,7 @@ const PersonProfile = () => {
                 {duties.map((duty, index) => (
                     <li key={index} style={{ background: '#f9f9f9', margin: '10px 0', padding: '10px', borderRadius: '5px', boxShadow: '0 0 10px rgba(0,0,0,0.1)' }}>
                         <strong style={{ color: '#333' }}>{duty.title}</strong>: <span style={{ color: '#555' }}>{duty.content}</span>
+                        <span>{duty.time}</span>
                         <button onClick={() => deleteDuty(duty.id)}>Sil</button>
                     </li>
                 ))}

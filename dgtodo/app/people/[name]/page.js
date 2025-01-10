@@ -1,10 +1,11 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { people } from '@/utils/peopleList';
 import React, { useEffect, useState } from 'react';
-import { db } from '@/utils/firebase'; // Import Firestore instance
-import { collection, query, where, getDocs, deleteDoc, doc } from 'firebase/firestore'; // Import Firestore methods
+import { collection, query, where, getDocs, deleteDoc, doc, or } from 'firebase/firestore';
+import { people } from "../../../utils/peopleList";
+import { db } from "../../../utils/firebase";
+import "../../../styles/globals.css";
 
 const PersonProfile = () => {
     const { name } = useParams();
@@ -13,14 +14,20 @@ const PersonProfile = () => {
 
     useEffect(() => {
         const fetchDuties = async () => {
-            const q = query(collection(db, 'duties'), where('person', '==', name));
+            const q = query(
+                collection(db, 'duties'),
+                or(
+                    where('person', '==', name),
+                    where('assignedBy', '==', person.email)
+                )
+            );
             const querySnapshot = await getDocs(q);
             const dutiesList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             setDuties(dutiesList);
         };
 
         fetchDuties();
-    }, [name]);
+    }, [name, person.email]);   
 
     const deleteDuty = async (id) => {
         await deleteDoc(doc(db, 'duties', id));
@@ -32,16 +39,17 @@ const PersonProfile = () => {
     }
 
     return (
-        <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-            <h1 style={{ color: '#333' }}>{person.user}'s Profile</h1>
-            <p style={{ color: '#555' }}>Email: {person.email}</p>
-            <h2 style={{ color: '#333', marginTop: '20px' }}>Duties:</h2>
-            <ul style={{ listStyleType: 'none', padding: 0 }}>
+        <div className="profile-container">
+            <h1 className="profile-heading">{person.user}'s Profile</h1>
+            <p className="profile-email">Email: {person.email}</p>
+            <h2 className="duties-heading">Duties:</h2>
+            <ul className="duties-list">
                 {duties.map((duty, index) => (
-                    <li key={index} style={{ background: '#f9f9f9', margin: '10px 0', padding: '10px', borderRadius: '5px', boxShadow: '0 0 10px rgba(0,0,0,0.1)' }}>
-                        <strong style={{ color: '#333' }}>{duty.title}</strong>: <span style={{ color: '#555' }}>{duty.content}</span>
+                    <li key={index} className="duty-item">
+                        <strong className="duty-title">{duty.title}</strong> 
+                        <span className="duty-content">{duty.content}</span>
                         <span>{duty.time}</span>
-                        <button onClick={() => deleteDuty(duty.id)}>Sil</button>
+                        <button className="delete-button" onClick={() => deleteDuty(duty.id)}>Sil</button>
                     </li>
                 ))}
             </ul>

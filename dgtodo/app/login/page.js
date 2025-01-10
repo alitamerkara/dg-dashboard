@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { auth } from '../../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import "../../styles/globals.css";
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -22,10 +23,10 @@ const LoginPage = () => {
   };
 
   return (
-    <div className='container'>
-      <h1 className='heading'>Login Page</h1>
+    <div className='login-container'>
+      <h1 className='login-heading'>Login Page</h1>
       <form className='login-form' onSubmit={handleSubmit}>
-        <div>
+        <div className='login-form-group'>
           <label htmlFor="email">Email:</label>
           <input
             type="email"
@@ -36,7 +37,7 @@ const LoginPage = () => {
             required
           />
         </div>
-        <div>
+        <div className='login-form-group'>
           <label htmlFor="password">Password:</label>
           <input
             type="password"
@@ -47,8 +48,8 @@ const LoginPage = () => {
             required
           />
         </div>
-        {error && <p className="error">{error}</p>}
-        <button type="submit">Login</button>
+        {error && <p className="login-error">{error}</p>}
+        <button type="submit" className="login-button">Login</button>
       </form>
     </div>
   );

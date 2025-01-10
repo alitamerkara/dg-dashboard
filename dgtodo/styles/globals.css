@@ -1,201 +1,523 @@
-body {
-  background-color: #f9f9f9;
-  padding: 0;
-  margin: 0;
+body{
+    margin:0;
+    padding:0;
+}
+.profile-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 97.8%;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.container {
-  text-align: center;
-  height: 60.8vh;
-  background-color: #f0f0f0;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  position: relative;
+.profile-heading {
+    color: #333;
+    font-size: 2em;
+    margin-bottom: 10px;
 }
 
-.header {
-  background-color: #06cf7b;
-  color: white;
-  padding: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.profile-email {
+    color: #555;
+    font-size: 1.2em;
+    margin-bottom: 20px;
 }
 
-.nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
+.duties-heading {
+    color: #333;
+    margin-top: 20px;
+    font-size: 1.5em;
 }
 
-.nav a {
-  margin: 0 1rem;
-  color: white;
-  text-decoration: none;
-  transition: color 0.3s;
+.duties-list {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 80%;
+
 }
 
-.nav a:hover {
-  color: #ccc;
+.duty-item {
+    background: linear-gradient(135deg, #f9f9f9, #e0e0e0);
+    /* margin: 10px; */
+    padding: 20px 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap:20px;
+    transition: transform 0.2s;
+    width: 180px;
+    height: 180px;
+    cursor: pointer
 }
 
-.nav .sign-out-button {
-  margin: 0 1rem;
-  color: white;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  transition: color 0.3s;
+.duty-item:hover {
+    transform: scale(1.02);
 }
 
-.nav .sign-out-button:hover {
-  color: #ccc;
+.duty-title {
+    color: #333;
+    font-weight: bold;
+    font-size: 0.9em;
 }
 
-.main {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1rem;
+.duty-content {
+    color: #555;
+    /* margin-left: 10px; */
+    flex-grow: 1;
+    font-size: 0.8em;
 }
 
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 98.35%;
-  height: 8%;
-  background-color: #1e3a8a;
-  color: white;
-  text-align: center;
-  padding: 1rem;
-  margin-top: 2rem;
+.duty-person {
+    color: #777;
+    font-size: 0.8em;
+    border-bottom: 1px solid #adacac ;
+    padding-bottom: 5px;
 }
 
-.heading {
-  font-size: 2.5rem;
-  color: #05b36a;
-  margin-bottom: 1rem;
+.duty-assignedBy {
+    color: #777;
+    font-size: 0.8em;
+    border-bottom: 1px solid #adacac ;
+    padding-bottom: 5px;
 }
 
-.paragraph {
-  font-size: 1.2rem;
-  color: #666;
-  margin-bottom: 1.5rem;
+.duty-item button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
-.subheading {
-  font-size: 1.5rem;
-  color: #333;
+.duty-item button:hover {
+    background-color: #45a049;
 }
 
-.tamer {
-  color: red;
-  font-size: 1.5em;
-  font-weight: bold;
-  text-align: center;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  padding: 1em;
-  border: 1px solid red;
-  border-radius: 5px;
-  background-color: #f8d7da;
+.duty-item .delete-button {
+    background-color: #ff4d4d; /* Red for "Sil" */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.duty-item .delete-button:hover {
+    background-color: #ff1a1a;
+}
+
+.complete-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.complete-button:hover {
+    background-color: #45a049;
+}
+
+.search-input {
+    width: 30%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-input:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    outline: none;
+}
+
+.refresh-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-bottom: 20px;
+}
+
+.refresh-button:hover {
+    background-color: #45a049;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25%;
+    height: 30%;
+    padding: 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modalContent {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalItem {
+    margin-bottom: 15px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalItem label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #818080;
+}
+.modalItem p{
+    color: #818080;
+    font-size: 0.8em;
+    margin-bottom: 5px;
+}
+
+.modalItem input {
+    width: 60%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.modalItem input:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    outline: none;
+}
+.modalSaveButton{
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.modalSaveButton:hover {
+    background-color: #45a049;
+}
+
+.modalCloseButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    font-size: 0.8rem;
+    cursor: pointer;
+    background-color: #fd4242;
+    color : white;
+    transition: color 0.2s;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.modalCloseButton:hover {
+    color: #fa1919;
+    background-color: #fff;
+    border: 1px solid gray;
+}
+
+.no-results {
+    color: #ff4d4d;
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.people-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.people-item {
+    background: linear-gradient(135deg, #f9f9f9, #e0e0e0);
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s;
+    gap: 20px;
+}
+
+.people-item:hover {
+    transform: scale(1.01);
+}
+
+.people-title {
+    color: #333;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.people-content {
+    color: #555;
+    margin-left: 10px;
+    flex-grow: 1;
+    font-size: 1em;
+}
+
+.people-item button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.people-item button:hover {
+    background-color: #45a049;
+}
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    background-color: #f0f0f0;
+    padding: 20px;
+    text-align: center;
+}
+
+.home-heading {
+    color: #333;
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.home-subheading {
+    color: #555;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.home-links {
+    display: flex;
+    gap: 20px;
+    text-decoration: none;
+}
+
+.home-link {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.home-link:hover {
+    background-color: #45a049;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+    background-color: #f0f0f0;
+    padding: 20px;
+    text-align: center;
+
+.login-heading {
+    color: #45a049;;
+    font-size: 2.5em;
+    margin-bottom: 20px;
 }
 
 .login-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 25%;
+    
 }
 
-.login-form div {
-  margin-bottom: 1rem;
+.login-form-group {
+    margin-bottom: 15px;
 }
 
-.login-form label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-  color: green;
+.login-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
 }
 
-.login-form input {
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100%;
-  max-width: 300px;
+.login-form-group input {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.login-form button {
-  padding: 0.5rem 1rem;
-  background-color: #06cf7b;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+.login-form-group input:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    outline: none;
 }
 
-.login-form button:hover {
-  background-color: #05b36a;
+.login-error {
+    color: #ff4d4d;
+    font-size: 1em;
+    margin-bottom: 15px;
 }
-.personCard{
+
+.login-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.login-button:hover {
+    background-color: #45a049;
+}
+
+.header {
+  background-color: #333;
+  padding: 10px 20px;
+}
+
+.main-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-  border-bottom: 1px solid #ccc;
+  background-color: #45a049
 }
-.modal {
-  position: fixed;
-  z-index: 1;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 35%;
-  height: 25%;
-  background-color: rgb(172, 171, 171);
-  border-radius: 8px;
+
+.nav-logo {
+  border-radius: 50%;
 }
-.modalContent{
-  width: 100%;
-  height: 100%;
+
+.nav-links {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+  gap: 20px;
 }
-.modalItem{
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
 }
-.modalItem input{
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100%;
-  max-width: 300px;
+
+.nav-link:hover {
+  text-decoration: underline;
 }
-.modal button{
-  padding: 0.5rem 1rem;
-  background-color: #02a561;
+
+.sign-out-button {
+  background-color: #ff4d4d;
   color: white;
   border: none;
-  border-radius: 4px;
+  padding: 10px 20px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  font-size: 18px;
+  border-radius: 5px;
 }
-.closeButton{
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 0.5rem;
-  background-color: #f0f0f0;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
+
+.sign-out-button:hover {
+  background-color: #ff1a1a;
+}
+
+.profile-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    background-color: #f0f0f0;
+}
+
+.profile-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+}
+
+.profile-avatar {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+.profile-name {
+    color: #333;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.profile-email {
+    color: #555;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.profile-bio {
+    color: #777;
+    font-size: 1em;
 }

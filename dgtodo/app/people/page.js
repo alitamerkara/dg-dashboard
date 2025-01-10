@@ -1,10 +1,11 @@
 'use client';
 
-import { people } from '@/utils/peopleList';
+import { people } from '../../utils/peopleList';
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { db } from '@/utils/firebase'; // Import Firestore instance
-import { collection, addDoc } from 'firebase/firestore'; // Import Firestore methods
+import {db} from "../../utils/firebase"
+import { collection, addDoc } from 'firebase/firestore';
+import { getAuth } from "firebase/auth";
 
 const PeoplePage = () => {
     const [openModal, setOpenModal] = useState(false);
@@ -14,6 +15,26 @@ const PeoplePage = () => {
     const [dutyContent, setDutyContent] = useState("");
     const [dutyPerson, setDutyPerson] = useState("");
     const [saved, setSaved] = useState("");
+    const auth = getAuth();
+    const user = auth.currentUser; 
+    let currentUserEmail = "";
+    if (user) {
+        currentUserEmail = user.email;
+    }
+    const month= [
+        "Ocak",
+        "Şubat",
+        "Mart",
+        "Nisan",
+        "Mayıs",
+        "Haziran",
+        "Temmuz",
+        "Ağustos",
+        "Eylül",
+        "Ekim",
+        "Kasım",
+        "Aralık"
+    ]
 
     const openModalHandler = (name) => {
         setDutyPerson(name);
@@ -21,21 +42,26 @@ const PeoplePage = () => {
     };
     const dutyHandler = async () => {
         try {
-            const currentDate = new Date();
-            const formattedDate = `${currentDate.getHours()}:${currentDate.getMinutes()} ${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
-            await addDoc(collection(db, 'duties'), {
-                title: dutyTitle,
-                content: dutyContent,
-                person: dutyPerson,
-                time: formattedDate
-            });
-            setDutyPerson("");
-            setDutyTitle("");
-            setDutyContent("");
-            setSaved("Görev başarıyla eklendi.");
-            setTimeout(() => {
-            setOpenModal(false); 
-            },1000);
+            if (dutyTitle !== "" && dutyContent !== "") {
+                const currentDate = new Date();
+                const formattedDate = `${currentDate.getDate()} ${month[currentDate.getMonth()]} ${currentDate.getFullYear()}
+                ${currentDate.getHours()}:${currentDate.getMinutes()>9? currentDate.getMinutes(): "0" + currentDate.getMinutes()}`;
+                await addDoc(collection(db, 'duties'), {
+                    title: dutyTitle,
+                    content: dutyContent,
+                    person: dutyPerson,
+                    assignedBy: currentUserEmail,
+                    time: formattedDate
+                });
+                setSaved("Görev başarıyla eklendi.");
+                setTimeout(() => {
+                    setOpenModal(false);
+                    setDutyPerson("");
+                    setDutyTitle("");
+                    setDutyContent("");
+                    setSaved("");
+                }, 700);
+            }
         } catch (e) {
             console.error("Error adding document: ", e);
         }
@@ -45,7 +71,7 @@ const PeoplePage = () => {
         setSearch(e.target.value);
         if (e.target.value) {
             const filteredPeople = people.filter((person) =>
-                person.name.toLowerCase().includes(e.target.value.toLowerCase())
+                person.user.toLowerCase().includes(e.target.value.toLowerCase())
             );
             setModifiedPeople(filteredPeople);
         } else {
@@ -53,37 +79,42 @@ const PeoplePage = () => {
         }
     };
 
-    const searchPeople = modifiedPeople.length > 0 ? modifiedPeople : people;
+    const searchPeople = search.length > 0 ? modifiedPeople : people;
 
     return (
-        <div>
-            <h1>People Page</h1>
-            <input type="text" value={search} placeholder="Ara..." onChange={handlechange} />
-            <div style={{ overflowY: 'scroll', height: '70vh' }}>
-                {searchPeople.map((person) => (
-                    <div key={person.id} className="personCard">
-                        <p>{person.user}</p>
-                        <p>{person.email}</p>
-                        <Link href={`/people/${person.name}`}>
-                           Profile
-                        </Link>
-                        <button onClick={() => openModalHandler(person.name)}>Görev Ata</button>
-                    </div>
-                ))}
+        <div className="profile-container">
+            <h1 className="profile-heading">People Page</h1>
+            <input type="text" value={search} placeholder="Ara..." onChange={handlechange} className="search-input" />
+            <div style={{ overflowY: 'scroll', height: '70vh', width: '70%', padding:"30px", border:"1px solid #ccc", borderRadius:"10px",}}>
+                {searchPeople.length > 0 ? (
+                    <ul className="people-list">
+                        {searchPeople.map((person) => (
+                            <li key={person.id} className="people-item">
+                                <strong className="people-title">{person.user}</strong>: <span className="people-content">{person.email}</span>
+                                <Link href={`/people/${person.name}`}>
+                                    Profile Git
+                                </Link>
+                                <button onClick={() => openModalHandler(person.user)}>Görev Ata</button>
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p className="no-results">Aradığınız kişi bulunamadı.</p>
+                )}
                 {openModal && (
                     <div className="modal">
                         <form className="modalContent" onSubmit={dutyHandler}>
                             <div className='modalItem'>
                                 <label htmlFor="duty">Görev Başlığı:</label>
-                                <input type="text" id="duty" name="duty" required value={dutyTitle} onChange={(e) => setDutyTitle(e.target.value)} />
+                                <input type="text" id="duty" name="duty" required value={dutyTitle} onChange={(e) => setDutyTitle(e.target.value)} style={{ textAlign: 'left' }} />
                             </div>
                             <div className='modalItem'>
                                 <label htmlFor="dutyContent">Görev İçeriği:</label>
-                                <input type="text" id="dutyContent" name="dutyContent" required value={dutyContent} onChange={(e) => setDutyContent(e.target.value)} />
+                                <textarea type="text" style={{width:"62%", height:"100px", border:"1px solid #ccc", padding:"10px", fontSize:"0.8rem"}} name="dutyContent" required value={dutyContent} onChange={(e) => setDutyContent(e.target.value)} />
                             </div>
-                            <button className='closeButton' onClick={() => setOpenModal(false)}>x</button>
-                            <button type="button" onClick={dutyHandler}>Kaydet</button>
-                            <div>{saved}</div>
+                            <button className='modalCloseButton' onClick={() => setOpenModal(false)}>x</button>
+                            <button className='modalSaveButton' type="button" onClick={dutyHandler}>Kaydet</button>
+                            <div style={{margin:"10px 0px"}}>{saved}</div>
                         </form>
                     </div>
                 )}
